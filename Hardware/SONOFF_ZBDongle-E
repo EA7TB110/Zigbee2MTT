@@ -1,0 +1,44 @@
+Modelo: ZBDongle-E
+Fabricante:	SONOFF
+Descripción:	Sonoff Zigbee 3.0 USB Dongle Plus (EFR32MG21) con firmware para router.
+EL Led:	led de indicador de nivel y calidad del enlace.
+
+Origen: https://www.zigbee2mqtt.io/devices/ZBDongle-E.html
+
+
+Notas
+Cómo crear un enrutador SONOFF ZBDongle-E
+Puede crear un potente enrutador Zigbee a partir de un Sonoff Zigbee 3.0 USB Dongle Plus normal (modelo "ZBDongle-E" con chip EFR32MG21) 
+actualizando el firmware del enrutador en el dispositivo. Puede encontrar la guía oficial para actualizar el dispositivo aquí: 
+https://github.com/itead/Sonoff_Zigbee_Dongle_Firmware/tree/master/Dongle-E/Router
+Dongle USB SONOFF Zigbee 3.0 más actualización de firmware. La guía también contiene el enlace al firmware oficial del enrutador SONOFF para ZBDongle-E.
+
+Como alternativa al desmontaje del dispositivo, también puede utilizar Silabs Firmware Flasher basado en navegador. 
+https://darkxst.github.io/silabs-firmware-builder/Antes de actualizar, descargue el firmware del enrutador y conecte el dongle a un puerto USB de su computadora. 
+Se requiere un navegador que admita la API WebSerial; En caso de duda, utilice Google Chrome o Microsoft Edge. Una vez finalizado el flasheo, 
+el dongle se reiniciará inmediatamente en modo de emparejamiento. Combínalo como de costumbre con Z2M.
+
+Consejos
+La guía de SONOFF no es muy detallada. Aquí hay algunos consejos adicionales:
+
+Primero, debes desmontar el dispositivo y sacar la placa lógica de su carcasa. Para esto necesitas un destornillador Phillips J00. 
+
+En segundo lugar, necesita un software que admita el protocolo de transferencia de archivos XMODEM para enviar la imagen del firmware al dispositivo. 
+En Debian Linux como Ubuntu puedes usar lrzsz,
+Instale el protocolo de transferencia XMODEM y el emulador de terminal Putty con
+
+SO basado en Debian: sudo apt install lrzsz putty SO basado en arch: sudo paxman -S lrzsz putty
+
+El usuario debe estar en el grupo de acceso telefónico para poder acceder a los puertos serie.
+
+SO basado en Debian: sudo adduser $USER sistema operativo basado en dialout arch: sudo usermod -a -G uucp $USER
+
+iniciar y cerrar sesión para que la membresía del grupo entre en vigencia (puede verificar ejecutando id)
+
+
+En tercer lugar, debes operar en la placa lógica desnuda mientras está enchufada. Esto es mucho más fácil si usas un cable de extensión USB.
+En cuarto lugar, para ingresar al modo de cargador de arranque, debe
+Conecte el dispositivo
+
+Conéctese al dispositivo con el software serial (para parámetros de conexión serial, consulte la guía)
+putty -serial -sercfg 115200,8,n,1 /dev/ttyACM0
